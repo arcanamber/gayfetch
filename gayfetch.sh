@@ -6,6 +6,7 @@ USERNAME=$(whoami)
 HOSTNAME=$(hostname)
 KERNEL=$(uname -r)
 CPU=$(grep "model name" /proc/cpuinfo | head -1 | cut -d ":" -f 2-)
+UPTIME=$(uptime -p)
 
 # Define memory information variables
 MEM_TOTAL=$(free -m | awk '/Mem:/ {printf "%d", $2}')
@@ -22,11 +23,12 @@ IP_ADDRESS=$(ip addr show | awk '/inet /{print $2}' | sed 's/\/.*//;s/^[ \t]*//'
 MAC_ADDRESS=$(ip link show | awk '/ether/{print $2}')
 
 # Output system information
-echo -e "\033[1;35m$USERNAME@$HOSTNAME\033[0m"
-echo -e "\033[1;37m$(printf '%.0s-' $(seq 1 $(( ${#USERNAME} + ${#HOSTNAME} + 1 ))))\033[0m"
-echo -e "\033[1;35mkernel\033[0m: $KERNEL"
-echo -e "\033[1;35mcpu\033[0m: $CPU"
-echo -e "\033[1;35mram\033[0m: $MEM_USED MB / $MEM_TOTAL MB ($MEM_PERCENT)"
-echo -e "\033[1;35mdisk\033[0m: $DISK_USED / $DISK_TOTAL ($DISK_PERCENT)"
+echo -e " gayfetch | \033[1;35m$USERNAME@$HOSTNAME\033[0m"
+echo -e "----------+\033[1;37m$(printf '%.0s-' $(seq 1 $(( ${#USERNAME} + ${#HOSTNAME} + 1 ))))\033[0m"
+echo -e "    Be    | \033[1;35mkernel\033[0m: $KERNEL"
+echo -e "   Gay,   | \033[1;35muptime\033[0m: $UPTIME"
+echo -e "    Do    | \033[1;35mcpu\033[0m: $CPU"
+echo -e "   Crime  | \033[1;35mram\033[0m: $MEM_USED MB / $MEM_TOTAL MB ($MEM_PERCENT)"
+echo -e "  :3 <3   | \033[1;35mdisk\033[0m: $DISK_USED / $DISK_TOTAL ($DISK_PERCENT)"
 # echo -e "\033[1;35mIP Address\033[0m: $IP_ADDRESS"
 # echo -e "\033[1;35mMAC Address\033[0m: $MAC_ADDRESS"
